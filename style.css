@@ -1,0 +1,1002 @@
+:root {
+    --dark-text: hsl(229, 25%, 31%);
+    --score-text: hsl(229, 64%, 46%);
+    --header-outline: hsl(217, 16%, 45%);
+    --yellow: hsl(40, 84%, 53%);
+    --dark-yellow: hsl(40, 84%, 35%);
+    --blue: hsl(230, 89%, 65%);
+    --dark-blue: hsl(230, 89%, 52%);
+    --cyan: hsl(189, 58%, 57%);
+    --dark-cyan: hsl(189, 58%, 47%);
+    --red: hsl(349, 70%, 56%);
+    --dark-red: hsl(349, 71%, 46%);
+    --violet: hsl(261, 72%, 63%);
+    --dark-violet: hsl(261, 73%, 53%);
+    --green: hsl(145, 60%, 50%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+html {
+    width: 100%;
+    height: 100dvh;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+    font-family: "Barlow Semi Condensed", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    all: unset;
+}
+
+
+
+
+#splash-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0, 0.5);
+    display: none;
+    z-index: 99;
+}
+
+#splash-screen .rules>#rules-img {
+    width: 360px;
+}
+
+#splash-screen.show {
+    display: flex;
+}
+
+
+#splash-screen .rules {
+    /* width: 300px; */
+    border-radius: 12px;
+    background-color: #eaeaea;
+    padding: 2rem;
+}
+
+
+
+#splash-screen .rules .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--dark-text);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+#splash-screen .rules .head #close {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #ddd;
+    padding: 5px;
+    transition: 0.2s;
+    transition-property: background-color, transform;
+}
+
+#splash-screen .rules .head #close:hover {
+    background-color: #bababa;
+    transition: 0.3s background-color;
+}
+
+#splash-screen .rules .head #close:active {
+    transform: scale(0.98);
+    transition: 0.3s transform;
+}
+
+
+
+.container {
+    width: 100%;
+    padding: 15px;
+    margin: auto;
+}
+
+header .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    border-radius: 12px;
+    border: 3px solid var(--header-outline);
+    width: 65%;
+    padding: 1rem;
+    margin: 0 auto;
+    height: 151px;
+}
+
+header .score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #eaeaea;
+    padding: .6rem 2rem;
+}
+
+header .score p {
+    color: var(--score-text);
+}
+
+header .score h1 {
+    color: var(--dark-text);
+    font-size: 2.2rem;
+}
+
+
+#reset {
+    border-radius: 5px;
+    font-size: 0.5rem;
+    padding: 3px 6px;
+    background-color: var(--red);
+    color: #eaeaea;
+    box-shadow: 0 4px 0 0 var(--dark-red);
+    cursor: pointer;
+    transition: 0.2s;
+    transition-property: box-shadow, transform;
+}
+
+#reset:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 0 var(--dark-red);
+    transition: 0.2s;
+    transition-property: box-shadow, transform;
+}
+
+main {
+    text-align: center;
+    position: relative;
+    min-height: 472px;
+
+}
+
+/*?>>>>>>>>>>>>>>test<<<<<<<<<<<<<< */
+
+
+
+.game {
+    position: absolute;
+    margin: 2rem auto;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 800px;
+    height: 400px;
+    display: grid;
+    grid-template-columns: repeat(3, [col-start] minmax(min-content, 1fr) [col-end]);
+    grid-template-rows: 40px 1fr;
+
+}
+
+
+.game.hidden {
+    visibility: hidden;
+    pointer-events: none;
+    display: none;
+}
+
+.game .computer {
+    grid-column-start: 3;
+}
+
+.game .text {
+    color: #eaeaea;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+
+
+.game .card {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border-bottom: 10px solid transparent;
+    background-color: rgba(0, 0, 0, 0.179);
+    transition: 0.3s;
+    transition-property: background-color;
+    align-self: center;
+    justify-self: center;
+    grid-row-start: 2;
+    animation: loading 1.2s ease .6s 1;
+}
+
+@keyframes loading {
+    17% {
+        transform: scale(1.1);
+    }
+
+    34% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    67% {
+        transform: scale(1);
+    }
+
+    84% {
+        transform: scale(1.1);
+    }
+
+    100% {
+
+        transform: scale(1);
+    }
+
+}
+
+.game .card .icon {
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    /* padding: 10px; */
+    background-color: #eaeaea;
+    width: 200px;
+    height: 200px;
+    border-top: 10px solid #bababa;
+}
+
+
+.game .card.rock {
+    border-bottom-color: var(--dark-red);
+    background-color: var(--red);
+}
+
+.game .card.paper {
+    border-bottom-color: var(--dark-blue);
+    background-color: var(--blue);
+}
+
+.game .card.scissors {
+    border-bottom-color: var(--dark-yellow);
+    background-color: var(--yellow);
+}
+
+.game .card.spock {
+    border-bottom-color: var(--dark-cyan);
+    background-color: var(--cyan);
+}
+
+.game .card.lizard {
+    border-bottom-color: var(--dark-violet);
+    background-color: var(--violet);
+}
+
+
+.game #mycard.rock {
+    transform: translate(266px, 48px) scale(0.5);
+}
+
+.game #mycard.paper {
+    transform: translate(135px, -152px) scale(0.5);
+}
+
+.game #mycard.scissors {
+    transform: translate(398px, -152px) scale(0.5);
+}
+
+
+
+.game #mycard.rock,
+.game #mycard.paper,
+.game #mycard.scissors,
+.game #mycard.spock,
+.game #mycard.lizard {
+    animation: move 0.35s .2s ease-in-out 1 both,
+        loading 1.2s ease .6s 1;
+}
+
+.game #mycard.card.winner,
+.game #computer-card.card.winner {
+    box-shadow: 0 0 0 40px #eeeeee06,
+        0 0 0 80px #eeeeee06,
+        0 0 0 120px #eeeeee06;
+    transition: 0.3s 0.2s box-shadow;
+}
+
+
+@keyframes move {
+    100% {
+        transform: translate(0, 0)scale(1);
+    }
+}
+
+
+.game .card img {
+    width: 120px;
+    padding: 12px;
+}
+
+
+.result {
+    grid-row-start: 2;
+    margin: 0 20px;
+    opacity: 0;
+    transition: .3s opacity;
+}
+
+.result h2 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.result h2.win {
+    color: var(--green);
+}
+
+.result h2.tie {
+    color: var(--cyan);
+}
+
+.result h2.lose {
+    color: var(--dark-red);
+}
+
+
+#again {
+    padding: 0.85rem 2.8rem;
+    background-color: #eaeaea;
+    color: var(--red);
+    border-radius: 10px;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 0 0 #bababa;
+    transition-property: transform, box-shadow, opacity;
+    width: fit-content;
+    margin: 0 auto;
+    opacity: 0;
+}
+
+#again:active {
+    transform: scale(0.98)translateY(3px);
+    transform-origin: center center;
+    transition: 0.3s;
+    transition-property: transform, box-shadow;
+    box-shadow: 0 0 0 0 #bababa;
+}
+
+
+
+
+@keyframes winner {
+    100% {
+        box-shadow: 0 0 0 40px #eeeeee06,
+            0 0 0 80px #eeeeee06,
+            0 0 0 120px #eeeeee06;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/*?>>>>>>>>>>>>>>test<<<<<<<<<<<<<< */
+
+
+main .cards {
+    margin: 2rem auto;
+    background-image: url(images/bg-triangle.svg);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 300px;
+    display: grid;
+    grid-template-columns: 190px repeat(7, [col-start] minmax(min-content, 1fr) [col-end]) 190px;
+    grid-template-columns: 200px repeat(3, [col-start] minmax(min-content, 1fr) [col-end])200px;
+    grid-template-rows: repeat(2, minmax(min-content, 1fr));
+    height: 400px;
+    width: 800px;
+    transition: 0.4s opacity;
+}
+
+
+
+main .cards.hidden {
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.4s opacity;
+}
+
+
+main .cards .text {
+    font-weight: 600;
+    color: #eaeaea;
+    font-size: 1.35rem;
+    letter-spacing: 2px;
+}
+
+main .cards .you {
+    grid-row-start: 1;
+    grid-column-start: 2;
+}
+
+main .cards .computer {
+    grid-row-start: 1;
+    grid-column-start: 4;
+}
+
+
+
+main .cards .card {
+    grid-row-start: 2;
+}
+
+
+
+main .cards .card {
+    border-radius: 50%;
+    /* padding: 1.5rem; */
+    width: 130px;
+    height: 130px;
+    display: grid;
+    place-items: center;
+    border-bottom: 5px solid;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    box-shadow: 0 0 0 0px #eeeeee3d;
+    transition: 0.3s ease-in-out;
+    transition-property: box-shadow, background-color, transform;
+}
+
+main .cards .card:focus,
+main .cards .card:hover {
+    transition: 0.3s ease-in-out;
+    transition-property: box-shadow, background-color, transform;
+    box-shadow: 0 0 0 8px #eeeeee60;
+    outline: none;
+}
+
+
+main .cards .card:active {
+    transform: scale(0.96);
+    transition: 0.3s;
+}
+
+main .cards .paper:focus,
+main .cards .paper:hover {
+    background-color: var(--dark-blue);
+    transition: 0.3s ease-in-out;
+    transition-property: box-shadow, background-color, transform;
+
+}
+
+main .cards .rock:focus,
+main .cards .rock:hover {
+    background-color: var(--dark-red);
+    transition: 0.3s ease-in-out;
+    transition-property: box-shadow, background-color, transform;
+}
+
+main .cards .scissors:focus,
+main .cards .scissors:hover {
+    background-color: var(--dark-yellow);
+    transition: 0.3s ease-in-out;
+    transition-property: box-shadow, background-color, transform;
+
+}
+
+main .cards .card .icon {
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    /* padding: 10px; */
+    background-color: #eaeaea;
+    width: 100px;
+    height: 100px;
+    border-top: 5px solid #bababa;
+}
+
+main .cards .card img {
+    width: 60px;
+    padding: 6px;
+}
+
+main .cards .paper {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    align-self: center;
+    justify-self: end;
+    background: var(--blue);
+    border-color: var(--dark-blue);
+}
+
+main .cards .scissors {
+    grid-row-start: 1;
+    grid-column-start: 4;
+    align-self: center;
+    justify-self: start;
+    background: var(--yellow);
+    border-color: var(--dark-yellow);
+}
+
+main .cards .rock {
+    grid-column-start: 3;
+    grid-row-start: 2;
+    align-self: center;
+    justify-self: center;
+    background: var(--red);
+    border-color: var(--dark-red);
+}
+
+main .cards .lizard,
+main .cards .spock {
+    display: none;
+}
+
+/*?>>>>>>>> advanced <<<<<<<<<<<<< */
+main .cards.advanced {
+    background-image: url(images/bg-pentagon.svg);
+    grid-template-columns: repeat(11, [col-start] minmax(min-content, 1fr) [col-end]);
+    grid-template-rows: repeat(7, [col-start] minmax(min-content, 1fr) [col-end]);
+    background-size: 330px;
+}
+
+main .cards.advanced .card {
+    width: 100px;
+    height: 100px;
+}
+
+main .cards.advanced .card .icon {
+    width: 75px;
+    height: 75px;
+}
+
+main .cards.advanced .card .icon img {
+    width: 50px;
+}
+
+
+main .cards.advanced .scissors {
+    align-self: start;
+    justify-self: center;
+    grid-column: 5 / 8;
+    grid-row: 1 / 3;
+}
+
+main .cards.advanced .paper {
+    align-self: start;
+    justify-self: start;
+    grid-row: 3 / 5;
+    grid-column: 8 / 10;
+}
+
+main .cards.advanced .rock {
+    justify-self: center;
+    align-self: center;
+    grid-row: 6 / 8;
+    grid-column: 7 / 9;
+}
+
+main .cards .lizard {
+    display: grid;
+    background-color: var(--violet);
+    border-color: var(--dark-violet);
+    justify-self: center;
+    align-self: center;
+    grid-row: 6 / 8;
+    grid-column: 4 /6;
+}
+
+main .cards .lizard:focus,
+main .cards .lizard:hover {
+    background-color: var(--dark-violet);
+    transition: 0.3s;
+}
+
+main .cards .spock {
+    display: grid;
+    background-color: var(--cyan);
+    border-color: var(--dark-cyan);
+    align-self: start;
+    justify-self: end;
+    grid-column: 3 / 5;
+    grid-row: 3 / 5;
+}
+
+main .cards .spock:focus,
+main .cards .spock:hover {
+    background-color: var(--dark-cyan);
+    transition: 0.3s;
+}
+
+
+
+
+.game5 #mycard.scissors {
+    transform: translate(266px, -202px) scale(calc(1 / 2.6));
+}
+
+.game5 #mycard.paper {
+    transform: translate(426px, -88px) scale(calc(1 / 2.6));
+}
+
+.game5 #mycard.rock {
+    transform: translate(375px, 91px) scale(calc(1 / 2.6));
+}
+
+.game5 #mycard.spock {
+    transform: translate(108px, -87px) scale(calc(1 / 2.6));
+}
+
+.game5 #mycard.lizard {
+    transform: translate(157px, 91px) scale(calc(1 / 2.6));
+}
+
+
+
+
+
+main .classic .lizard,
+main .classic .spock {
+    display: none;
+}
+
+/*?>>>>>>>> end advanced <<<<<<<<<<<<< */
+
+
+
+
+
+
+
+
+
+main .btns {
+    display: flex;
+    justify-content: space-around;
+}
+
+main .btns .btn {
+    width: fit-content;
+    padding: 0.55rem 2rem;
+    border-radius: 10px;
+    border: 2px solid #eaeaea;
+    color: #eaeaea;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.386),
+        inset 0 0 11px 0 rgba(255, 255, 255, 0.26);
+
+}
+
+main .btns .btn:focus,
+main .btns .btn:hover {
+    background-color: #eaeaea;
+    color: var(--dark-text);
+    transition: 0.3s;
+    transition-property: background-color, color;
+    outline: none;
+}
+
+main .btns .btn:active {
+    transform: scale(0.98);
+    transition: 0.2s transform;
+}
+
+
+
+
+
+
+
+
+@media (max-width: 576px) {
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+        width: 100%;
+        padding: 10px 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100dvh;
+    }
+
+    #splash-screen {
+        background-color: #eaeaea;
+        width: 100%;
+        height: 100%;
+
+    }
+
+    #splash-screen .rules .head #close {
+        display: none;
+    }
+
+    #splash-screen .rules .head {
+        justify-content: center;
+        font-size: 2.2rem;
+    }
+
+    #close-phone {
+        width: 80px;
+        padding: 1rem;
+        background: #ddd;
+        border-radius: 50%;
+    }
+
+
+    #splash-screen .rules {
+        padding: 1rem;
+        height: 760px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header .head {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        gap: 100px;
+    }
+
+    main .cards.advanced {
+        grid-template-columns: repeat(11, [col-start] minmax(20px, 1fr) [col-end]);
+        grid-template-rows: repeat(7, [col-start] minmax(min-content, 1fr) [col-end]);
+        background-size: 90%;
+    }
+
+    main .cards {
+        width: 100%;
+        grid-template-columns: 0px repeat(3, [col-start] minmax(min-content, 1fr) [col-end]) 0px;
+    }
+
+
+    main .cards.advanced .rock {
+        grid-row: 6 / 8;
+        grid-column: 8 / 10;
+    }
+
+    main .cards.advanced .paper {
+        grid-row: 3 / 5;
+        grid-column: 9 / 11;
+    }
+
+    main .cards.advanced .scissors {
+        grid-row: 1 / 3;
+        grid-column: 5 / 8;
+    }
+
+    main .cards.advanced .spock {
+        grid-row: 3 / 5;
+        grid-column: 2 / 4;
+    }
+
+    main .cards.advanced .lizard {
+        grid-row: 6 / 8;
+        grid-column: 3 / 5;
+    }
+
+    main .cards .card {
+        width: 110px;
+        height: 110px;
+    }
+
+
+    .game #mycard.rock {
+        transform: translate(94px, 185px) scale(calc(110 / 150));
+    }
+
+
+    .game #mycard.scissors {
+        transform: translate(216px, -15px) scale(calc(110 / 150));
+    }
+
+
+    .game #mycard.paper {
+        transform: translate(-27px, -15px) scale(calc(110 / 150));
+    }
+
+
+    .game5 #mycard.scissors {
+        transform: translate(94px, -66px) scale(calc(100 / 150));
+    }
+
+
+    .game5 #mycard.paper {
+        transform: translate(245px, 49px) scale(calc(100 / 150));
+    }
+
+    .game5 #mycard.spock {
+        transform: translate(-55px, 50px) scale(calc(100 / 150));
+    }
+
+    .game5 #mycard.lizard {
+        transform: translate(-6px, 227px) scale(calc(100 / 150));
+    }
+
+    .game5 #mycard.rock {
+        transform: translate(195px, 227px) scale(calc(100 / 150));
+    }
+
+
+    main .cards .card .icon {
+        width: 85px;
+        height: 85px;
+    }
+
+    main .cards.advanced .card .icon {
+        width: 72px;
+        height: 72px;
+    }
+
+    main .cards.advanced .card {
+        width: 92px;
+        height: 92px;
+    }
+
+
+    main .cards.advanced {
+        max-width: 100%;
+    }
+
+
+
+    .game {
+        width: 380px;
+    }
+
+    .game .card {
+        width: 150px;
+        height: 150px;
+        border-bottom: 7px solid transparent;
+        grid-row-start: 2;
+    }
+
+    .game .text {
+        font-size: 1rem;
+        grid-row-start: 3;
+        margin-top: 4rem;
+    }
+
+    .game .card .icon {
+        width: 120px;
+        height: 120px;
+        border-top: 6px solid #bababa;
+    }
+
+    .game .card img {
+        width: 90px;
+        padding: 12px;
+    }
+
+    .game {
+        grid-template-columns: repeat(2, [col-start] minmax(min-content, 1fr) [col-end]);
+        grid-template-rows: 40px 1fr 1fr;
+    }
+
+    .game .computer {
+        grid-column-start: 2;
+    }
+
+    .game .result {
+        grid-row-start: 4;
+        grid-column: span 2;
+        height: 255px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .result h2 {
+        font-size: 4rem;
+        margin-bottom: 1.8rem;
+    }
+
+    .game #mycard.card.winner,
+    .game #computer-card.card.winner {
+        box-shadow: 0 0 0 30px #eeeeee06, 0 0 0 60px #eeeeee06, 0 0 0 90px #eeeeee06;
+    }
+
+    #again {
+        width: 75%;
+    }
+}
+
+
+@media (min-width: 576px) {
+    .container {
+        width: 540px;
+        max-width: 540px;
+    }
+
+
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 720px;
+        max-width: 720px;
+        padding: 20px;
+    }
+}
+
+@media (min-width: 960px) {
+    .container {
+        width: 960px;
+        max-width: 960px;
+        padding: 20px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1140px;
+        max-width: 1140px;
+        padding: 20px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        width: 1320px;
+        max-width: 1320px;
+        padding: 20px;
+    }
+}

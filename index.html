@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <!-- google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Kumbh+Sans:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Quicksand:wght@300..700&display=swap"
+    rel="stylesheet">
+
+  <!-- style file -->
+  <link rel="stylesheet" href="style.css">
+
+  <title>Rock, Paper, Scissors</title>
+
+
+</head>
+
+<body>
+
+  <!--? start splash screen -->
+  <div id="splash-screen">
+    <div class="rules">
+      <div class="head">
+        <h2>Rules</h2>
+        <img id="close" src="images/icon-close.svg" alt="">
+      </div>
+      <img id="rules-img" src="images/image-rules.svg" alt="">
+      <img id="close-phone" src="images/icon-close.svg" alt="">
+    </div>
+  </div>
+  <!--? end splash screen -->
+
+
+  <div class="container">
+
+    <header>
+      <div class="head">
+        <img id="logo" src="images/logo-bonus.svg" alt="">
+        <div class="score">
+          <p>score</p>
+          <h1></h1>
+          <p id="reset">reset</p>
+        </div>
+      </div>
+
+    </header>
+
+
+
+    <main id="choose-main">
+
+
+
+      <div class="cards  classic">
+        <div class="card rock" tabindex="0" data-card="rock">
+          <div class="icon">
+            <img src="images/icon-rock.svg" alt="">
+          </div>
+        </div>
+        <div class="card paper" tabindex="0" data-card="paper">
+          <div class="icon">
+            <img src="images/icon-paper.svg" alt="">
+          </div>
+        </div>
+        <div class="card scissors" tabindex="0" data-card="scissors">
+          <div class="icon">
+            <img src="images/icon-scissors.svg" alt="">
+          </div>
+        </div>
+        <div class="card spock" tabindex="0" data-card="spock">
+          <div class="icon">
+            <img src="images/icon-spock.svg" alt="">
+          </div>
+        </div>
+        <div class="card lizard" tabindex="0" data-card="lizard">
+          <div class="icon">
+            <img src="images/icon-lizard.svg" alt="">
+          </div>
+        </div>
+
+
+
+      </div>
+
+
+
+
+      <div class="game hidden">
+
+        <div class="text you">you picked</div>
+        <div class="text computer">the house picked</div>
+
+
+        <div id="mycard" class="card">
+          <div class="icon">
+            <img src="" alt="">
+          </div>
+        </div>
+
+        <div class="result">
+          <h2 class="lose"></h2>
+          <div id="again" tabindex="0">
+            play again
+          </div>
+        </div>
+
+        <div id="computer-card" class="card">
+          <div class="icon">
+            <img src="" alt="">
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+      <div class="btns">
+        <div class="btn mode" tabindex="0">
+          Advanced Mode
+        </div>
+        <div class="btn rules" tabindex="0">
+          rules
+        </div>
+      </div>
+
+
+
+
+
+    </main>
+
+
+
+
+    <footer>
+      <!-- <div class="attribution">
+        Challenge by <a rel="noopener" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend
+          Mentor</a>.
+        Coded by <a href="#">Your Name Here</a>.
+      </div> -->
+    </footer>
+    </ي>
+</body>
+<script src="main.js"></script>
+
+</html>
