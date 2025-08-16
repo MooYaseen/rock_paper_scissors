@@ -156,6 +156,9 @@ header .score h1 {
     font-size: 2.2rem;
 }
 
+#close-phone {
+    display: none;
+}
 
 #reset {
     border-radius: 5px;
@@ -771,6 +774,7 @@ main .btns .btn:active {
         padding: 1rem;
         background: #ddd;
         border-radius: 50%;
+        display: block;
     }
 
 
