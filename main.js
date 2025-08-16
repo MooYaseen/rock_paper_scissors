@@ -59,6 +59,11 @@ cards.forEach(el => {
         myCard.classList = `card ${myChoose}`
         myCardIcon.setAttribute('src', `images/icon-${myChoose}.svg`)
         computerCard.className = 'card'
+        computerCard.style.opacity = '0'
+        computerCard.style.transition = '0.3s opacity'
+        setTimeout(() => {
+            computerCard.style.opacity = '1'
+        }, 500);
         computerCardIcon.setAttribute('src', ``)
         result.textContent = ''
         rulesBtn.style.opacity = '0'
