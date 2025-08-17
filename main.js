@@ -89,8 +89,7 @@ function updateScore(change) {
 
 computerCard.addEventListener('animationend', (e) => {
     if (e.animationName == 'loading') {
-        let waitResult
-        waitResult = setTimeout(() => {
+        setTimeout(() => {
             playAgain.style.opacity = '1'
         }, 500);
 
