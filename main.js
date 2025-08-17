@@ -89,7 +89,7 @@ function updateScore(change) {
 
 computerCard.addEventListener('animationend', (e) => {
     if (e.animationName == 'loading') {
-
+        let waitResult
         waitResult = setTimeout(() => {
             playAgain.style.opacity = '1'
         }, 500);
@@ -101,7 +101,7 @@ computerCard.addEventListener('animationend', (e) => {
 
 
 
-        let gameResult = GameRules()
+        const gameResult = GameRules()
         if (gameResult == 'win') {
             result.textContent = `you ${gameResult}`
             updateScore(+1)

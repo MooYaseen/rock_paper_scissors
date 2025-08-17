@@ -1004,3 +1004,12 @@ main .btns .btn:active {
         padding: 20px;
     }
 }
+
+
+
+
+.attribution {
+    color: var(--dark-text);
+    text-align: center;
+    margin-top: 1rem;
+}
